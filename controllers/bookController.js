@@ -27,12 +27,22 @@ const getBooksByAuthor = async (req, res) => {
   const normalizedInput = author.trim().toLowerCase();
 
   const booksByAuthor = Books.filter((book) =>
-    book.authors?.some((a) => a.toLowerCase().startsWith(normalizedInput))
+    book.authors?.some((a) => a.toLowerCase().includes(normalizedInput))
   );
   res.status(200).json(booksByAuthor);
 };
 
-const getBooksByTitle = async (req, res) => {};
+const getBooksByTitle = async (req, res) => {
+  const title = req.params.title;
+  if (!title) {
+    return res.status(400).json({ message: "Book Title required" });
+  }
+  const normalizedInput = title.trim().toLowerCase();
+  const booksWithTitle = Books.filter((book) => {
+    return book.title.toLowerCase().includes(normalizedInput);
+  });
+  return res.status(200).json(booksWithTitle);
+};
 
 const getBookByISBN = async (req, res) => {};
 
