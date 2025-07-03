@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Emanuel-DevX/BookPinion-API/issues"
   },
-  "homepage": "https://github.com/Emanuel-DevX/BookPinion-API#readme"
+  "homepage": "https://github.com/Emanuel-DevX/BookPinion-API#readme",
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1"
+  }
 }
