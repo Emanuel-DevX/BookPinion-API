@@ -4,6 +4,7 @@ const fs = require("fs");
 const booksPath = path.join(__dirname, "../data/books.json");
 const Books = JSON.parse(fs.readFileSync(booksPath, "utf-8")); //Uses sync since the file is static
 
+//GET books/ route handler with pagination
 const getAllBooks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 25;
@@ -18,6 +19,8 @@ const getAllBooks = async (req, res) => {
     books: paginatedBooks,
   });
 };
+
+//GET books/author/:author-name
 const getBooksByAuthor = async (req, res) => {
   const author = req.params.author;
   if (!author) {
@@ -32,6 +35,8 @@ const getBooksByAuthor = async (req, res) => {
   res.status(200).json(booksByAuthor);
 };
 
+
+//GET books/title/:title
 const getBooksByTitle = async (req, res) => {
   const title = req.params.title;
   if (!title) {
@@ -44,7 +49,20 @@ const getBooksByTitle = async (req, res) => {
   return res.status(200).json(booksWithTitle);
 };
 
-const getBookByISBN = async (req, res) => {};
+
+//GET books/isbn/:isbn
+const getBookByISBN = async (req, res) => {
+  const isbn = req.params.isbn;
+  if (!isbn) {
+    return res.status(400).json({ message: "ISBN is required" });
+  }
+  const normalizedInput = isbn.trim();
+  const bookByISBN = Books.filter((book) =>
+    book.isbn.includes(normalizedInput)
+  );
+  return res.status(200).json(bookByISBN);
+};
+
 
 module.exports = {
   getAllBooks,
