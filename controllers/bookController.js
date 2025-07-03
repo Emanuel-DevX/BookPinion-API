@@ -3,7 +3,6 @@ const fs = require("fs");
 
 const booksPath = path.join(__dirname, "../data/books.json");
 const Books = JSON.parse(fs.readFileSync(booksPath, "utf-8")); //Uses sync since the file is static
-const Review = require("../models/Review");
 
 const getAllBooks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -11,7 +10,7 @@ const getAllBooks = async (req, res) => {
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
-  const paginatedBooks = Books.splice(startIndex, endIndex);
+  const paginatedBooks = Books.slice(startIndex, endIndex);
   res.json({
     page,
     totalBooks: Books.length,
@@ -19,7 +18,19 @@ const getAllBooks = async (req, res) => {
     books: paginatedBooks,
   });
 };
-const getBooksByAuthor = async (req, res) => {};
+const getBooksByAuthor = async (req, res) => {
+  const author = req.params.author;
+  if (!author) {
+    return res.status(400).json({ message: "Author name required" });
+  }
+
+  const normalizedInput = author.trim().toLowerCase();
+
+  const booksByAuthor = Books.filter((book) =>
+    book.authors?.some((a) => a.toLowerCase().startsWith(normalizedInput))
+  );
+  res.status(200).json(booksByAuthor);
+};
 
 const getBooksByTitle = async (req, res) => {};
 
