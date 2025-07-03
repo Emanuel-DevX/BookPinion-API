@@ -4,6 +4,7 @@ const PORT = process.env.PORT;
 const connectDB = require("./config/db");
 
 const userRoutes = require("./routes/userRoutes");
+const bookRoutes = require("./routes/bookRoutes")
 
 connectDB();
 
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/users", userRoutes);
+app.use("/books", bookRoutes)
 
 app.listen(PORT, () => {
   console.log(`All good surver is running on port: ${PORT}`);

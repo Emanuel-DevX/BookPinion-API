@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const reviewSchema = new mongoose.sSchema({
+const reviewSchema = new mongoose.Schema({
   isbn: {
     type: String,
     required: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: user,
+    ref: "User",
     required: true,
   },
   rating: {
