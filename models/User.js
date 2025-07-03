@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     trim: true,
     minlength: 5,
   },
-  passwword: {
+  password: {
     type: String,
     required: true,
     minlength: 8,
@@ -34,5 +34,5 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = mongoose.model(userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;

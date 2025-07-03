@@ -8,6 +8,7 @@ const userRoutes = require("./routes/userRoutes");
 connectDB();
 
 const app = express();
+app.use(express.json());
 
 app.use("/users", userRoutes);
 
