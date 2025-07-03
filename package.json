@@ -1,0 +1,21 @@
+{
+  "name": "bookpinion-api",
+  "version": "1.0.0",
+  "description": "A RESTful API for managing book data, user reviews, and authentication. Built with Node.js, Express, and JWT.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emanuel-DevX/BookPinion-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emanuel-DevX/BookPinion-API/issues"
+  },
+  "homepage": "https://github.com/Emanuel-DevX/BookPinion-API#readme"
+}
