@@ -37,9 +37,13 @@ const loginUser = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      const token = jwt.sign({ userId: user._id, role: user.role }, secret, {
-        expiresIn: "1d",
-      });
+      const token = jwt.sign(
+        { userId: user._id, username: username, role: user.role },
+        secret,
+        {
+          expiresIn: "1d",
+        }
+      );
 
       return res.status(200).json({
         token,
@@ -73,7 +77,7 @@ const deleteUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-  
+
     await User.findByIdAndDelete(userIdToDelete);
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
