@@ -5,7 +5,7 @@ const secret = process.env.JWT_SECRET;
 const User = require("../models/User");
 
 const registerUser = async (req, res) => {
-  const { username, password, firstName, lastName } = req.body;
+  const { username, email, password, firstName, lastName } = req.body;
 
   try {
     const existing = await User.findOne({ username });
@@ -15,6 +15,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       username,
+      email,
       password: hashedPassword,
       firstName,
       lastName,
@@ -36,14 +37,55 @@ const loginUser = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      const token = jwt.sign({ userId: user._id, role: user.role }, secret, {
-        expiresIn: "1d",
+      const token = jwt.sign(
+        { userId: user._id, username: username, role: user.role },
+        secret,
+        {
+          expiresIn: "1d",
+        }
+      );
+
+      return res.status(200).json({
+        token,
+        user: {
+          id: user._id,
+          username: user.username,
+          role: user.role,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        },
       });
-      return res.status(200).json({ token });
     } else {
       res.status(400).send("Invalid credentials");
     }
   } catch (err) {}
 };
 
-module.exports = { registerUser, loginUser };
+const deleteUser = async (req, res) => {
+  const userIdToDelete = req.params.id;
+  const { userId, role } = req.user;
+
+  if (userId !== userIdToDelete && role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Unauthorized to delete this user" });
+  }
+
+  try {
+    console.log(userIdToDelete);
+    const user = await User.findById(userIdToDelete);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await User.findByIdAndDelete(userIdToDelete);
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal server error - unable to delete user",
+      error: err.message,
+    });
+  }
+};
+
+module.exports = { registerUser, loginUser, deleteUser };

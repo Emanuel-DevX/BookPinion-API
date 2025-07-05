@@ -7,7 +7,7 @@ const Books = JSON.parse(fs.readFileSync(booksPath, "utf-8")); //Uses sync since
 //GET books/ route handler with pagination
 const getAllBooks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 25;
+  const limit = Math.min(100, parseInt(req.query.limit) || 25);
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
@@ -35,7 +35,6 @@ const getBooksByAuthor = async (req, res) => {
   res.status(200).json(booksByAuthor);
 };
 
-
 //GET books/title/:title
 const getBooksByTitle = async (req, res) => {
   const title = req.params.title;
@@ -46,9 +45,11 @@ const getBooksByTitle = async (req, res) => {
   const booksWithTitle = Books.filter((book) => {
     return book.title.toLowerCase().includes(normalizedInput);
   });
+  if (!booksWithTitle) {
+    return res.status(404).json({ message: "Book not found" });
+  }
   return res.status(200).json(booksWithTitle);
 };
-
 
 //GET books/isbn/:isbn
 const getBookByISBN = async (req, res) => {
@@ -62,7 +63,6 @@ const getBookByISBN = async (req, res) => {
   );
   return res.status(200).json(bookByISBN);
 };
-
 
 module.exports = {
   getAllBooks,
