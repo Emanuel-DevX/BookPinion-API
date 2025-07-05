@@ -60,17 +60,20 @@ const loginUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   const userIdToDelete = req.params.id;
   const { userId, role } = req.user;
+
   if (userId !== userIdToDelete && role !== "admin") {
     return res
       .status(403)
       .json({ message: "Unauthorized to delete this user" });
   }
+
   try {
     console.log(userIdToDelete);
     const user = await User.findById(userIdToDelete);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+  
     await User.findByIdAndDelete(userIdToDelete);
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
