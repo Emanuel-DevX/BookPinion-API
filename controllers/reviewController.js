@@ -82,12 +82,10 @@ const deleteReview = async (req, res) => {
       .json({ message: "ISBN is required to delete a review" });
   }
   try {
-    await Review.deleteOne({ isbn, targetUser });
-    return res
-      .status(200)
-      .json({
-        message: `Successfully deleted review for book with isbn${isbn}`,
-      });
+    await Review.deleteOne({ isbn, username: targetUser });
+    return res.status(200).json({
+      message: `Successfully deleted review for book with isbn${isbn}`,
+    });
   } catch (err) {
     return res.status(500).json({
       message: "Internal server error - unable to delete a review",
