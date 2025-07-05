@@ -7,7 +7,7 @@ const Books = JSON.parse(fs.readFileSync(booksPath, "utf-8")); //Uses sync since
 //GET books/ route handler with pagination
 const getAllBooks = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 25;
+  const limit = Math.min(100, parseInt(req.query.limit) || 25);
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;

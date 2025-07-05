@@ -9,6 +9,8 @@ const bookRoutes = require("./routes/bookRoutes")
 connectDB();
 const app = express();
 app.use("/", express.static("public"))
+app.use("/docs", express.static("public/docs.html"));
+
 
 app.use(express.json());
 
