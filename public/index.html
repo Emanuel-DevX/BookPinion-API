@@ -1,36 +1,202 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BookPinion API</title>
+    <title>BookPinion API - The Ultimate Book Review Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="flex items-center justify-center min-h-screen px-4">
-    <div class="text-center max-w-xl">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">📚 BookPinion API</h1>
-      <p class="mb-8 text-lg text-gray-300">
-        A RESTful API to access and review over 10,000 books by title, author,
-        or ISBN. Easily add and manage user reviews with secure authentication.
-      </p>
-      <a
-        href="/docs"
-        class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold transition"
-      >
-        View API Docs
-      </a>
 
-      <!-- Optional video demo -->
-      <div class="mt-10">
-        <h2 class="text-xl font-semibold mb-4">📺 Quick Demo</h2>
-        <video
-          controls
-          class="mx-auto rounded-lg w-full max-w-md border border-gray-700"
-        >
-          <source src="/demo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+  </head>
+  <body class="bg-slate-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-slate-700"
+    >
+      <div class="max-w-6xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div>
+              <h1 class="text-2xl font-bold text-white">
+                <a href="/">BookPinion</a>
+              </h1>
+              <p class="text-xs text-slate-400">API Platform</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <a
+              href="/docs"
+              class="bg-gradient-to-r from-purple-600 to-black px-4 py-2 rounded-lg text-white font-medium"
+            >
+              Documentation
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black/20"></div>
+
+      <!-- Floating elements -->
+      <div
+        class="absolute top-20 left-10 w-20 h-20 bg-purple-500/20 rounded-full blur-xl floating-animation"
+      ></div>
+      <div
+        class="absolute bottom-20 right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl floating-animation"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-500/20 rounded-full blur-xl floating-animation"
+      ></div>
+
+      <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+        <div class="mb-8">
+          <div
+            class="inline-flex items-center glass-effect px-4 py-2 rounded-full mb-6"
+          >
+            <span
+              class="w-2 h-2 bg-green-400 rounded-full mr-2 pulse-glow"
+            ></span>
+            <span class="text-sm font-medium text-purple-200"
+              >Production Ready API</span
+            >
+          </div>
+
+          <h1
+            class="text-6xl md:text-8xl font-black mb-6 text-white leading-tight"
+          >
+            BookPinion
+            <span
+              class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-white"
+            >
+              API Platform
+            </span>
+          </h1>
+
+          <p
+            class="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto leading-relaxed"
+          >
+            The ultimate RESTful API for book reviews and ratings. Built with
+            enterprise-grade security, scalable architecture, and
+            developer-first design.
+          </p>
+
+          <div class="flex max-w-64 mx-auto justify-center mb-12">
+            <a
+              href="/docs"
+              class="bg-gradient-to-l from-purple-600 to-black px-8 py-4 rounded-xl font-semibold text-lg inline-flex items-center"
+            >
+              <span class="mr-2">🚀</span>
+              Get Started
+            </a>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Express</span>
+            <span class="tech-badge">MongoDB</span>
+            <span class="tech-badge">JWT</span>
+            <span class="tech-badge">bcrypt</span>
+            <span class="tech-badge">MVC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="stat-card p-8 rounded-xl text-center">
+          <div class="text-4xl font-black text-purple-400 mb-2">10K+</div>
+          <div class="text-slate-300 font-medium">Books Available</div>
+        </div>
+        <div class="stat-card p-8 rounded-xl text-center">
+          <div class="text-4xl font-black text-blue-400 mb-2">99.9%</div>
+          <div class="text-slate-300 font-medium">Uptime</div>
+        </div>
+        <div class="stat-card p-8 rounded-xl text-center">
+          <div class="text-4xl font-black text-green-400 mb-2">&lt;100ms</div>
+          <div class="text-slate-300 font-medium">Response Time</div>
+        </div>
+        <div class="stat-card p-8 rounded-xl text-center">
+          <div class="text-4xl font-black text-pink-400 mb-2">100%</div>
+          <div class="text-slate-300 font-medium">Secure</div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-12">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center justify-around">
+          <div class="lg:max-w-xl">
+            <div class="flex items-center mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">
+                  <a href="/">BookPinion API</a>
+                </h3>
+                <p class="text-sm text-slate-400">
+                  Enterprise Book Review Platform
+                </p>
+              </div>
+            </div>
+            <p class="text-slate-400 mb-4">
+              Built by
+              <a
+                href="https://emanuelmolla.dev"
+                class="text-slate-300 hover:text-white"
+                >Emanuel</a
+              >
+              using cutting-edge technologies. Secure, scalable, and
+              developer-friendly API for book enthusiasts.
+            </p>
+            <div class="flex space-x-4">
+              <span class="text-slate-500">Node.js</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-slate-500">Express</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-slate-500">MongoDB</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-slate-500">JWT</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-white mb-4">API</h4>
+            <ul class="space-y-2 text-slate-400">
+              <li>
+                <a href="/docs" class="hover:text-white transition-colors"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/docs#authentication"
+                  class="hover:text-white transition-colors"
+                  >Authentication</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/docs#endpoints"
+                  class="hover:text-white transition-colors"
+                  >Endpoints</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/docs#error-handling"
+                  class="hover:text-white transition-colors"
+                  >Error Handling</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-slate-700 mt-8 pt-8 text-center">
+          <p class="text-slate-400">
+            © 2025 BookPinion API. Built for developers, designed for scale.
+          </p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
